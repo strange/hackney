@@ -1,30 +1,10 @@
-REBAR?=./rebar3
-DIALYZER?=dialyzer
-PLT=.hackney.plt
+PROJECT = hackney
 
-all: build
+DEPS = idna mimerl certifi ssl_verify_hostname
 
-dev: devbuild
+dep_idna = git http://github.com/benoitc/erlang-idna.git
+dep_mimerl = git http://github.com/benoitc/mimerl.git
+dep_ssl_verify_hostname = git http://github.com/benoitc/ssl_verify_hostname.git
+dep_certifi = git http://github.com/certifi/erlang-certifi.git
 
-doc: dev
-	$(REBAR) as dev edoc
-
-clean:
-	$(REBAR) clean
-
-build:
-	$(REBAR) compile
-
-test:
-	$(REBAR) eunit
-
-# development
-#
-devclean:
-	$(REBAR) as dev clean
-
-devbuild:
-	$(REBAR) as dev compile
-
-dialyzer:
-	$(REBAR) dialyzer
+include erlang.mk
